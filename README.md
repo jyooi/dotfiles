@@ -9,7 +9,52 @@ Personal agent and engineering configuration.
 - `OPINIONS.md` - durable engineering, product, and career viewpoints.
 - `STACK.md` - default tech stack and tooling.
 
+## Install
+
+This repo uses a clone-and-symlink model.
+Keep the repo cloned anywhere and run `install.sh`; it symlinks the files into `$HOME`.
+After that, editing a file or running `git pull` updates every machine in place.
+
+The script is idempotent and non-destructive.
+Re-running it is a no-op for already-correct links, and any real file it would replace is moved to a timestamped `.bak` first.
+
+### macOS
+
+```sh
+# Prerequisite: git (ships with Xcode CLT) and the GitHub CLI for the private clone
+xcode-select --install 2>/dev/null || true
+brew install gh && gh auth login   # skip if gh is already authenticated
+
+gh repo clone jyooi/dotfiles ~/dotfiles
+~/dotfiles/install.sh
+```
+
+### Arch Linux (Omarchy)
+
+```sh
+# Prerequisite: git and the GitHub CLI for the private clone
+sudo pacman -S --needed git github-cli
+gh auth login                      # skip if gh is already authenticated
+
+gh repo clone jyooi/dotfiles ~/dotfiles
+~/dotfiles/install.sh
+```
+
+If you use SSH keys instead of the GitHub CLI, replace the clone with:
+
+```sh
+git clone git@github.com:jyooi/dotfiles.git ~/dotfiles && ~/dotfiles/install.sh
+```
+
+### What it links
+
+| Link | Target |
+| --- | --- |
+| `~/AGENTS.md` | `~/dotfiles/AGENTS.md` |
+| `~/OPINIONS.md` | `~/dotfiles/OPINIONS.md` |
+| `~/STACK.md` | `~/dotfiles/STACK.md` |
+| `~/.claude/CLAUDE.md` | `~/dotfiles/AGENTS.md` |
+
 ## Local setup
 
-Claude Code reads `~/.claude/CLAUDE.md`.
-Locally that path is a symlink to `~/AGENTS.md`, which keeps both names in sync from one file.
+Claude Code reads `~/.claude/CLAUDE.md`, which the install script points at `AGENTS.md` so both names stay in sync from one file.
