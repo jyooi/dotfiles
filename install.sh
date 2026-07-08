@@ -36,9 +36,10 @@ link() {
 }
 
 echo "Installing dotfiles from $REPO on $OS"
-link "$REPO/AGENTS.md"   "$HOME/AGENTS.md"
-link "$REPO/OPINIONS.md" "$HOME/OPINIONS.md"
-link "$REPO/STACK.md"    "$HOME/STACK.md"
-link "$REPO/AGENTS.md"   "$HOME/.claude/CLAUDE.md"
+link "$REPO/AGENTS.md"        "$HOME/AGENTS.md"
+link "$REPO/OPINIONS.md"      "$HOME/OPINIONS.md"
+link "$REPO/STACK.md"         "$HOME/STACK.md"
+link "$REPO/MODEL_ROUTING.md" "$HOME/MODEL_ROUTING.md"
+link "$REPO/AGENTS.md"        "$HOME/.claude/CLAUDE.md"
 
 echo "Done. $linked linked, $backed backed up."

@@ -24,3 +24,4 @@ Common instructions for David's agents across all scenarios.
 
 - Default tech stack and tooling: read ~/STACK.md.
 - David's engineering and product viewpoints: read ~/OPINIONS.md.
+- Routing work across models (planner/executor, cross-provider): read ~/MODEL_ROUTING.md.
