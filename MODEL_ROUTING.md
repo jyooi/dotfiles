@@ -51,6 +51,18 @@ A model can play either role when the task calls for it: fable-5 can execute a d
 - The hardest unsupervised problems (architecture, gnarly debugging, orchestrating other agents) go to fable-5.
 - Never use Haiku.
 
+## Force the split: one subagent per task
+
+The Planner's default failure mode is doing everything itself.
+When it does, no delegation happens, model routing never triggers, and you paid the frontier rate for work an Executor should have done.
+
+To guarantee the split fires, make the Planner decompose before it acts:
+
+- Break the work into an explicit task list first, before touching any of it.
+- Spawn one subagent per task; do not let the Planner execute tasks inline.
+- One subagent per task forces a model-selection decision for every task, which is what makes routing happen at all.
+- A run with no subagents spawned is the signal the Planner skipped the split - treat it as a smell, not a shortcut.
+
 ## Choosing the executor: auto-route, confirm the consequential
 
 Route automatically; do not ask which executor to use on every task.
