@@ -21,13 +21,13 @@ Keeping megabytes of raw material out of the Planner's context is the entire cos
 ## Capability table
 
 Rankings, higher = better.
-Cost reflects what I actually pay (my Codex allotment makes gpt-5.5 effectively free), not list price.
+Cost reflects what I actually pay (my Codex allotment makes gpt-5.6-sol effectively free), not list price.
 Intelligence is how hard a problem you can hand the model unsupervised.
 Taste covers UI/UX, code quality, API design, and copy.
 
 | model    | cost | intelligence | taste | default role |
-|----------|------|--------------|-------|--------------|
-| gpt-5.5  | 9    | 8            | 5     | Executor     |
+| -------- | ---- | ------------ | ----- | ------------ |
+| gpt-5.6-sol | 8 | 8            | 6     | Executor     |
 | sonnet-5 | 5    | 5            | 7     | Executor     |
 | opus-4.8 | 4    | 7            | 8     | Planner      |
 | fable-5  | 2    | 9            | 9     | Planner      |
@@ -43,10 +43,10 @@ A model can play either role when the task calls for it: fable-5 can execute a d
   Escalating costs less than shipping mediocre work.
 - Don't let cost prevent you from using the right model for the job.
   Instead, take advantage of cheaper options to get more information and try things before moving the work to a more expensive option.
-- Bulk/mechanical work (clear-spec implementation, data analysis, migrations, log-digging): gpt-5.5 - it's effectively free.
+- Bulk/mechanical work (clear-spec implementation, data analysis, migrations, log-digging): gpt-5.6-sol - it's effectively free.
   Give it a tight, self-contained spec; check a sample of its output and escalate the batch to a Planner-tier model if the sample misses the bar.
 - Anything user-facing (UI, copy, API design) needs taste >= 7: sonnet-5 is the floor, opus-4.8 or fable-5 when quality matters.
-- Reviews of plans/implementations: fable-5 or opus-4.8, optionally gpt-5.5 as an extra independent perspective.
+- Reviews of plans/implementations: fable-5 or opus-4.8, optionally gpt-5.6-sol as an extra independent perspective.
   For a real second opinion, spawn a second reviewer with a different lens (adversarial, security, requirements-conformance) rather than the same prompt twice - same model, same prompt is not a second opinion.
 - The hardest unsupervised problems (architecture, gnarly debugging, orchestrating other agents) go to fable-5.
 - Never use Haiku.
@@ -97,7 +97,7 @@ A worker that can only search, fetch, and report back is a safe boundary; a Plan
 ## Cross-provider mechanics
 
 Claude tiers (sonnet-5, opus-4.8, fable-5) run via the Agent/Workflow `model` parameter ('sonnet', 'opus', 'fable'), with `effort` where supported.
-gpt-5.5 is only reachable through the Codex CLI: `codex exec` and `codex review` (my `~/.codex/config.toml` defaults to gpt-5.5 at xhigh reasoning).
+gpt-5.6-sol is only reachable through the Codex CLI: `codex exec` and `codex review` (my `~/.codex/config.toml` defaults to gpt-5.6-sol at xhigh reasoning).
 
 Direct one-shot use, for work not covered by a Codex skill (investigation, data analysis):
 
@@ -109,10 +109,10 @@ codex exec -s read-only "<self-contained prompt>"
 - `-o <file>` writes the agent's final message to a file the Planner reads back; `--output-schema <file.json>` forces a structured JSON return.
 - `-C <dir>` sets the working root; `--full-auto` runs sandboxed with low-friction auto-execution.
 
-Using gpt-5.5 inside workflows and subagents (the model parameter only takes Claude models, so use a wrapper):
+Using gpt-5.6-sol inside workflows and subagents (the model parameter only takes Claude models, so use a wrapper):
 
 - Spawn a thin Claude wrapper agent with `model: 'sonnet', effort: 'low'` whose prompt instructs it to write a self-contained codex prompt, run `codex exec` via Bash, and return the report (use `schema` on the wrapper for structured output).
-- Always label these agents with a `gpt-5.5:` prefix, e.g. `{label: 'gpt-5.5:review-auth'}` - the workflow UI shows the wrapper's Claude model, so the label is the only sign the real worker is gpt-5.5.
+- Always label these agents with a `gpt-5.6-sol:` prefix, e.g. `{label: 'gpt-5.6-sol:review-auth'}` - the workflow UI shows the wrapper's Claude model, so the label is the only sign the real worker is gpt-5.6-sol.
 - Codex runs can exceed Bash's 10-minute timeout: pass an explicit timeout, or run in the background and poll for the report file.
-- Parallel gpt-5.5 implementation agents must use `isolation: 'worktree'` so codex edits don't collide in the shared checkout.
+- Parallel gpt-5.6-sol implementation agents must use `isolation: 'worktree'` so codex edits don't collide in the shared checkout.
 - Workflow token budgets only count Claude tokens; codex work is invisible to `budget.spent()`.
