@@ -42,4 +42,10 @@ link "$REPO/STACK.md"         "$HOME/STACK.md"
 link "$REPO/MODEL_ROUTING.md" "$HOME/MODEL_ROUTING.md"
 link "$REPO/AGENTS.md"        "$HOME/.claude/CLAUDE.md"
 
+if [ "$OS" = "Linux" ]; then
+  link "$REPO/config/waybar/config.jsonc"         "$HOME/.config/waybar/config.jsonc"
+  link "$REPO/config/waybar/style.css"            "$HOME/.config/waybar/style.css"
+  link "$REPO/config/waybar/scripts/ai-usage.sh"  "$HOME/.config/waybar/scripts/ai-usage.sh"
+fi
+
 echo "Done. $linked linked, $backed backed up."
