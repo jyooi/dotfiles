@@ -6,6 +6,7 @@ Use them for new work unless a project clearly dictates otherwise.
 ## Languages
 
 - TypeScript - default for web, tooling, and most application code.
+  Use Effect as the standard library for typed errors, dependency injection, and concurrency.
 - Rust - for performance-critical and systems work.
 - Elixir - for concurrent and fault-tolerant applications built on OTP.
 
