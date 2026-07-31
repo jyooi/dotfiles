@@ -20,6 +20,7 @@ Common instructions for David's agents across all scenarios.
 - Be concise: lead with the result, recommend rather than survey, and explain non-trivial trade-offs.
 - Confirm before destructive, outward-facing, or hard-to-reverse actions.
 - Never claim something works without running it and showing the output.
+- Use `gh-axi` for GitHub and `chrome-devtools-axi` for browser automation.
 
 ## References
 
