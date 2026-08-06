@@ -8,7 +8,6 @@ Personal agent and engineering configuration.
 - `CLAUDE.md` - a symlink to `AGENTS.md` so Claude Code and other tools read the same content.
 - `OPINIONS.md` - durable engineering, product, and career viewpoints.
 - `STACK.md` - default tech stack and tooling.
-- `MODEL_ROUTING.md` - how to route work across models (planner/executor, cross-provider).
 - `config/waybar/` - waybar status bar config (Omarchy), including the Claude/Codex usage-limit module (`scripts/ai-usage.sh`).
 
 ## Install
@@ -55,7 +54,6 @@ git clone git@github.com:jyooi/dotfiles.git ~/dotfiles && ~/dotfiles/install.sh
 | `~/AGENTS.md` | `~/dotfiles/AGENTS.md` |
 | `~/OPINIONS.md` | `~/dotfiles/OPINIONS.md` |
 | `~/STACK.md` | `~/dotfiles/STACK.md` |
-| `~/MODEL_ROUTING.md` | `~/dotfiles/MODEL_ROUTING.md` |
 | `~/.claude/CLAUDE.md` | `~/dotfiles/AGENTS.md` |
 | `~/.config/waybar/config.jsonc` (Linux only) | `~/dotfiles/config/waybar/config.jsonc` |
 | `~/.config/waybar/style.css` (Linux only) | `~/dotfiles/config/waybar/style.css` |
